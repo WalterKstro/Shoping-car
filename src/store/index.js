@@ -29,6 +29,9 @@ export default new Vuex.Store({
     },
     REMOVE_UNIT_INVENTORY(state,payload) {
       payload.inventory-=1
+    },
+    REMOVE_UNID_CARD_SHOPING(state, index) {
+      state.card.splice(index,1)
     }
   },
   actions: {
@@ -49,11 +52,23 @@ export default new Vuex.Store({
         }
       }
       commit('REMOVE_UNIT_INVENTORY', payload)
+    },
+    removeProductCardShoping({commit, state}, payload) {
+      if(payload.inventory > 1){
+        const product = state.card.find(product => product.id === payload.id)
+        commit('REMOVE_UNIT_INVENTORY', product)
+      }else {
+        const index = state.card.findIndex( product => product.id === payload.id)
+        commit('REMOVE_UNID_CARD_SHOPING',index)
+      }
     }
   },
   getters : {
     filterProductsByInventory(state) {
       return state.products.filter(product => product.inventory > 0)
+    },
+    filterCardShopingByUnits(state) {
+      return state.card.filter(product => product.inventory > 0)
     }
   },
   modules: {
