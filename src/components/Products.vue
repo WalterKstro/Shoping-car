@@ -18,7 +18,9 @@
         <td>{{ product.title }}</td>
         <td>{{ product.price }}</td>
         <td>{{ product.inventory }}</td>
-        <td><button class="btn btn-sm" @click="buyProduct(product)"><slot name="icon"></slot></button></td>
+        <td>
+          <button class="btn btn-sm" @click="func(product)"><slot name="icon"></slot></button>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -26,17 +28,18 @@
 
 <script>
 
-import {buyProduct} from '../mixins/buyProduct'
-
 export default {
   props : {
     products : {
       type : Array,
       required : true
+    },
+    func : {
+      type : Function,
+      required : true
     }
   },
-  name: "componentProducts",
-  mixins : [buyProduct]
+  name: "componentProducts"
 };
 </script>
 
