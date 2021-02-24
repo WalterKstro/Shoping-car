@@ -32,6 +32,14 @@ export default new Vuex.Store({
     },
     REMOVE_UNID_CARD_SHOPING(state, index) {
       state.card.splice(index,1)
+    },
+    RETURN_PRODUCT(state, payload) {
+      const foundedProduct = state.products.find(product => product.id === payload.id)
+      if (foundedProduct) {
+        foundedProduct.inventory++
+      }else {
+        state.products.push(payload)
+      }
     }
   },
   actions: {
@@ -61,6 +69,7 @@ export default new Vuex.Store({
         const index = state.card.findIndex( product => product.id === payload.id)
         commit('REMOVE_UNID_CARD_SHOPING',index)
       }
+      commit('RETURN_PRODUCT', payload)
     }
   },
   getters : {

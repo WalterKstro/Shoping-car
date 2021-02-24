@@ -26,7 +26,7 @@
   justify-content: space-evenly;
 }
 img{
-  width: 50%;
+  width: 40%;
   height: auto;
 }
 .nav a {
