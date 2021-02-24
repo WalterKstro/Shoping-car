@@ -81,7 +81,7 @@ export default new Vuex.Store({
     },
     calculateSubtotal(state) {
       const subTotal = state.card.reduce((accumulator, currentValue) => accumulator + currentValue.price * currentValue.inventory,0)
-      return Number(subTotal)
+      return Number(subTotal.toFixed(2))
     },
     calculateTotalIVA(state) {
       const total = state.card.reduce((accumulator, currentValue) => accumulator + (currentValue.price * 0.12 + currentValue.price) * currentValue.inventory,0)
