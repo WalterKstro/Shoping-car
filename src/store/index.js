@@ -78,6 +78,14 @@ export default new Vuex.Store({
     },
     filterCardShopingByUnits(state) {
       return state.card.filter(product => product.inventory > 0)
+    },
+    calculateSubtotal(state) {
+      const subTotal = state.card.reduce((accumulator, currentValue) => accumulator + currentValue.price * currentValue.inventory,0)
+      return Number(subTotal)
+    },
+    calculateTotalIVA(state) {
+      const total = state.card.reduce((accumulator, currentValue) => accumulator + (currentValue.price * 0.12 + currentValue.price) * currentValue.inventory,0)
+      return Number(total.toFixed(2))
     }
   },
   modules: {
